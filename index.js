@@ -3,6 +3,8 @@ const http = require('http')
 const morgan =  require('morgan')
 const bodyParser = require('body-parser')
 const dishRouter = require('./routes/dishRouter')
+const promoRouter = require('./routes/promoRouter')
+const leaderRouter = require('./routes/leaderRouter')
 
 const port = 3000
 const hostname = 'localhost' 
@@ -12,12 +14,14 @@ const app = express()   //Creates an Express application. It is a top-level func
 app.use(morgan('dev'))
 app.use(bodyParser.json())
 
-// dishes
+// dishes and /dishes/:dishId
 app.use('/dishes', dishRouter)
 
-//dishes/:dishId
+// promotions and /promotions/:promotionId
+app.use('/promotions', promoRouter)
 
-
+// leaders and /leaders/:leaderId
+app.use('/leaders', leaderRouter)
 
 app.use(express.static(__dirname + '/public')) // This will serve up files accordingly, this is enough
 
